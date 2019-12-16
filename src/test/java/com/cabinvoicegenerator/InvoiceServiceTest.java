@@ -1,0 +1,48 @@
+package com.cabinvoicegenerator;
+import org.junit.Assert;
+import org.junit.Test;
+
+public class InvoiceServiceTest {
+
+    @Test
+    public void givenDistanceAndTime_ReturnTotalFare_OfJourney_() {
+        InvoiceService cabInvoice = new InvoiceService();
+        double distance=2.0;
+        int time=5;
+        double fare=cabInvoice.getFair(distance,time);
+        Assert.assertEquals(25,fare,0.0);
+    }
+
+    @Test
+    public void givenLessDistanceOrTime_ShouldReturnMinFare() {
+        InvoiceService invoiceService = new InvoiceService();
+        double distance=0.1;
+        int time=1;
+        double fare= invoiceService.getFair(distance,time);
+        Assert.assertEquals(5,fare,0.0);
+    }
+
+    @Test
+    public void givenMultipleRide_ShouldReturnInvoiceSummary() {
+        InvoiceService invoiceService = new InvoiceService();
+        Ride[] ride = {new Ride(2.0, 5),
+                new Ride(0.1, 1)
+        };
+        InvoiceSummary invoiceSummary= invoiceService.getFair(ride);
+        InvoiceSummary expectedinvoiceSummary = new InvoiceSummary(2, 30);
+        Assert.assertEquals(expectedinvoiceSummary,invoiceSummary);
+    }
+
+    @Test
+    public void givenUserIdAndRide_ShouldReturnInvoiceSummary() {
+        InvoiceService invoiceService = new InvoiceService();
+        String userId="abc@gmail.com";
+        Ride[] ride = {new Ride(2.0, 5),
+                new Ride(0.1, 1)
+        };
+        invoiceService.addRides(userId,ride);
+        InvoiceSummary summary = invoiceService.getSummary(userId);
+        InvoiceSummary expectedinvoiceSummary = new InvoiceSummary(2, 30);
+        Assert.assertEquals(expectedinvoiceSummary,summary);
+    }
+}
