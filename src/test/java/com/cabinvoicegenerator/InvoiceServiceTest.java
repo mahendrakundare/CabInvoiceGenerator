@@ -54,6 +54,5 @@ public class InvoiceServiceTest {
         int time=5;
         double fare=invoiceService.getFair(InvoiceService.user.PERMIUM,distance,time);
         Assert.assertEquals(40,fare,0.0);
-
     }
 }
