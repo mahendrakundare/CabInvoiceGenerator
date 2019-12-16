@@ -6,10 +6,11 @@ public class InvoiceServiceTest {
 
     @Test
     public void givenDistanceAndTime_ReturnTotalFare_OfJourney_() {
-        InvoiceService cabInvoice = new InvoiceService();
+        InvoiceService invoiceService = new InvoiceService();
         double distance=2.0;
         int time=5;
-        double fare=cabInvoice.getFair(distance,time);
+//        double fare=cabInvoice.getFair(distance,time);
+        double fare=invoiceService.getFair(InvoiceService.user.NORMAL,distance,time);
         Assert.assertEquals(25,fare,0.0);
     }
 
@@ -44,5 +45,15 @@ public class InvoiceServiceTest {
         InvoiceSummary summary = invoiceService.getSummary(userId);
         InvoiceSummary expectedinvoiceSummary = new InvoiceSummary(2, 30);
         Assert.assertEquals(expectedinvoiceSummary,summary);
+    }
+
+    @Test
+    public void givenUserWithPreminumRide_ShouldReturnTotal_Fare() {
+        InvoiceService invoiceService = new InvoiceService();
+        double distance=2.0;
+        int time=5;
+        double fare=invoiceService.getFair(InvoiceService.user.PERMIUM,distance,time);
+        Assert.assertEquals(40,fare,0.0);
+
     }
 }

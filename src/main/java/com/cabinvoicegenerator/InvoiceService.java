@@ -1,6 +1,14 @@
 package com.cabinvoicegenerator;
 
 public class InvoiceService {
+    public double getFair(user type, double distance, int time) {
+        double totalFare=0;
+        if (user.NORMAL.equals(type)) {
+            return totalFare = getFair(distance, time);
+        }
+        return  totalFare = distance * PERMIUM_MINUMUM_COST_PER_KILOMETER + time * PERMIUM_COST_PER_TIME;
+    }
+
     public enum user {NORMAL,PERMIUM}
     private static final int NORMAL_COST_PER_TIME = 1;
     private static final double NORMAL_MINUMUM_COST_PER_KILOMETER = 10;
@@ -12,6 +20,7 @@ public class InvoiceService {
     RideRepository rideRepository=new RideRepository();
 
     public double getFair(double distance, int time) {
+
         double totalFare = distance * NORMAL_MINUMUM_COST_PER_KILOMETER + time * NORMAL_COST_PER_TIME;
         if(totalFare< NORMAL_MINIMUM_FARE)
             return NORMAL_MINIMUM_FARE;
