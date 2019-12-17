@@ -54,4 +54,5 @@ public class InvoiceServiceTest {
         InvoiceSummary expectedinvoiceSummary = new InvoiceSummary(2, 60);
         Assert.assertEquals(expectedinvoiceSummary,summary);
     }
+
 }

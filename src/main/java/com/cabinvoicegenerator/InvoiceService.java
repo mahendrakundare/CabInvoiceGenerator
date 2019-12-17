@@ -19,14 +19,13 @@ public class InvoiceService {
     }
 
     public double getFair(user type, double distance, int time) {
-        double totalFare=0;
         switch (type) {
             case NORMAL:
-                return totalFare=getFair(distance,time,NORMAL_COST_PER_TIME,NORMAL_MINUMUM_COST_PER_KILOMETER,NORMAL_MINIMUM_FARE);
+                return getFair(distance,time,NORMAL_COST_PER_TIME,NORMAL_MINUMUM_COST_PER_KILOMETER,NORMAL_MINIMUM_FARE);
             case PERMIUM:
-                return totalFare=getFair(distance,time,PERMIUM_COST_PER_TIME,PERMIUM_MINUMUM_COST_PER_KILOMETER,PREMIUM_MINIMUM_FARE);
+                return getFair(distance,time,PERMIUM_COST_PER_TIME,PERMIUM_MINUMUM_COST_PER_KILOMETER,PREMIUM_MINIMUM_FARE);
         }
-        return totalFare;
+        return 0;
     }
 
     private double getFair(double distance, int time, int costPerTime, double costPerKilometer, double minimumFare) {
