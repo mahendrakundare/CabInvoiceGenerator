@@ -9,7 +9,7 @@ public class InvoiceServiceTest {
         InvoiceService invoiceService = new InvoiceService();
         double distance=2.0;
         int time=5;
-        double fare=invoiceService.getFair(InvoiceService.user.NORMAL,distance,time);
+        double fare=invoiceService.calculateFare(InvoiceService.user.NORMAL,distance,time);
         Assert.assertEquals(25,fare,0.0);
     }
 
@@ -18,7 +18,7 @@ public class InvoiceServiceTest {
         InvoiceService invoiceService = new InvoiceService();
         double distance=0.1;
         int time=1;
-        double fare= invoiceService.getFair(InvoiceService.user.NORMAL,distance,time);
+        double fare= invoiceService.calculateFare(InvoiceService.user.NORMAL,distance,time);
         Assert.assertEquals(5,fare,0.0);
     }
 
@@ -28,7 +28,7 @@ public class InvoiceServiceTest {
         Ride[] ride = {new Ride(2.0, 5),
                 new Ride(0.1, 1)
         };
-        InvoiceSummary invoiceSummary= invoiceService.getFair(InvoiceService.user.NORMAL,ride);
+        InvoiceSummary invoiceSummary= invoiceService.calculateFare(InvoiceService.user.NORMAL,ride);
         InvoiceSummary expectedinvoiceSummary = new InvoiceSummary(2, 30);
         Assert.assertEquals(expectedinvoiceSummary,invoiceSummary);
     }
@@ -38,7 +38,7 @@ public class InvoiceServiceTest {
         InvoiceService invoiceService = new InvoiceService();
         double distance=2.0;
         int time=5;
-        double fare=invoiceService.getFair(InvoiceService.user.PERMIUM,distance,time);
+        double fare=invoiceService.calculateFare(InvoiceService.user.PERMIUM,distance,time);
         Assert.assertEquals(40,fare,0.0);
     }
 
@@ -60,7 +60,25 @@ public class InvoiceServiceTest {
         InvoiceService invoiceService = new InvoiceService();
         double distance=0.1;
         int time=1;
-        double fare= invoiceService.getFair(InvoiceService.user.PERMIUM,distance,time);
+        double fare= invoiceService.calculateFare(InvoiceService.user.PERMIUM,distance,time);
+        Assert.assertEquals(20,fare,0.0);
+    }
+
+    @Test
+    public void givenNoRides_ShouldReturn_MinimumFare_ForNormalRide() {
+        InvoiceService invoiceService = new InvoiceService();
+        double distance=0;
+        int time=0;
+        double fare=invoiceService.calculateFare(InvoiceService.user.NORMAL,distance,time);
+        Assert.assertEquals(5,fare,0.0);
+    }
+
+    @Test
+    public void givenNoRides_ShouldReturn_MinimumFare_ForPremiumRide() {
+        InvoiceService invoiceService = new InvoiceService();
+        double distance=0;
+        int time=0;
+        double fare=invoiceService.calculateFare(InvoiceService.user.PERMIUM,distance,time);
         Assert.assertEquals(20,fare,0.0);
     }
 }
