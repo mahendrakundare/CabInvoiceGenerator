@@ -10,19 +10,12 @@ public class InvoiceService {
     private static final double PREMIUM_MINIMUM_FARE = 20;
     RideRepository rideRepository=new RideRepository();
 
-    public InvoiceSummary getFair(Ride[] ride) {
+    public InvoiceSummary getFair(user userType,Ride[] ride) {
         double totalFare=0;
         for (Ride rides: ride) {
-             totalFare += this.getFair(rides.distance, rides.time);
+            totalFare += this.getFair(userType,rides.distance, rides.time);
         }
         return new InvoiceSummary(ride.length,totalFare);
-    }
-
-    public double getFair(double distance, int time) {
-        double totalFare = distance * NORMAL_MINUMUM_COST_PER_KILOMETER + time * NORMAL_COST_PER_TIME;
-        if(totalFare< NORMAL_MINIMUM_FARE)
-            return NORMAL_MINIMUM_FARE;
-        return totalFare;
     }
 
     public double getFair(user type, double distance, int time) {
@@ -48,7 +41,7 @@ public class InvoiceService {
         return;
     }
 
-    public InvoiceSummary getSummary(String userId) {
-        return this.getFair(rideRepository.getRide(userId));
+    public InvoiceSummary getSummary(String userId, user userType) {
+        return this.getFair(userType,rideRepository.getRide(userId));
     }
 }
