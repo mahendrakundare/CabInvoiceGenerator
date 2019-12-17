@@ -55,4 +55,12 @@ public class InvoiceServiceTest {
         Assert.assertEquals(expectedinvoiceSummary,summary);
     }
 
+    @Test
+    public void givenLessDistanceOrTimeForPremiumUser_ShouldReturnMinFare() {
+        InvoiceService invoiceService = new InvoiceService();
+        double distance=0.1;
+        int time=1;
+        double fare= invoiceService.getFair(InvoiceService.user.PERMIUM,distance,time);
+        Assert.assertEquals(20,fare,0.0);
+    }
 }
